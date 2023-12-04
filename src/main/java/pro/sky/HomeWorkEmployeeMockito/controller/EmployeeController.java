@@ -7,69 +7,45 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.sky.HomeWorkEmployeeMockito.api.EmployeeInterface;
 import pro.sky.HomeWorkEmployeeMockito.model.Employee;
 
-import java.util.Collection;
+import java.util.Map;
 
 @RestController
+@RequestMapping("/employee")
 public class EmployeeController {
 
     private final EmployeeInterface service;
 
     public EmployeeController(EmployeeInterface service) {
         this.service = service;
-
     }
 
-    @GetMapping(path = "/employee/add")
+    @GetMapping(path = "/add")
     public Employee employeeAdd(@RequestParam(required = true) String firstName,
-                                @RequestParam(required = true) String lastName) {
-        return service.add(firstName, lastName);
+                                @RequestParam(required = true) String lastName,
+                                @RequestParam(required = true) int departmentId,
+                                @RequestParam(required = true) double salary) {
+        return service.add(firstName, lastName, departmentId, salary);
     }
 
-    @GetMapping(path = "/employee/remove")
+    @GetMapping(path = "/remove")
     public Employee employeeRemove(@RequestParam(required = true) String firstName,
-                                   @RequestParam(required = true) String lastName) {
-        return service.remove(firstName, lastName);
+                                   @RequestParam(required = true) String lastName,
+                                   @RequestParam(required = true) int departmentId,
+                                   @RequestParam(required = true) double salary) {
+        return service.remove(firstName, lastName, departmentId, salary);
     }
 
-    @GetMapping(path = "/employee/find")
+    @GetMapping(path = "/find")
     public Employee employeeFind(@RequestParam(required = true) String firstName,
-                                 @RequestParam(required = true) String lastName) {
-        return service.find(firstName, lastName);
+                                 @RequestParam(required = true) String lastName,
+                                 @RequestParam(required = true) int departmentId,
+                                 @RequestParam(required = true) double salary) {
+        return service.find(firstName, lastName, departmentId, salary);
     }
 
     @GetMapping
-    public Collection<Employee> findAll() {
+    public Map<String, Employee> findAll() {
         return service.findAll();
-    }
-
-    @GetMapping(path = "/department/{id}/employees")
-    public Employee departmentIdEmployees(@RequestParam(required = true) String firstName,
-                                 @RequestParam(required = true) String lastName) {
-        return null;
-    }
-
-    @GetMapping(path = "/department/{id}/salary/sum")
-    public Employee departmentSalarySum(@RequestParam(required = true) String firstName,
-                                        @RequestParam(required = true) String lastName) {
-        return null;
-    }
-
-    @GetMapping(path = "department/{id}/salary/max")
-    public Employee departmentSalaryMax(@RequestParam(required = true) String firstName,
-                                        @RequestParam(required = true) String lastName) {
-        return null;
-    }
-
-    @GetMapping(path = "/department/{id}/salary/min")
-    public Employee departmentSalaryMin(@RequestParam(required = true) String firstName,
-                                        @RequestParam(required = true) String lastName) {
-        return null;
-    }
-
-    @GetMapping(path = "/department/employees")
-    public Employee departmentEmployees(@RequestParam(required = true) String firstName,
-                                        @RequestParam(required = true) String lastName) {
-        return null;
     }
 
 
