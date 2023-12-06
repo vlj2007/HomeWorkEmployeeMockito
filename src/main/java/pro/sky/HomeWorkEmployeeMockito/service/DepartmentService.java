@@ -19,6 +19,13 @@ public class DepartmentService implements DepartmentInterface {
         this.employeeService = employeeService;
     }
 
+    public int getSalarySum(int departmentId){
+        return employeeService.getEmployeesList().stream()
+                .filter(e -> e.getDepartment() ==departmentId)
+                .mapToInt(Employee::getSalary)
+                .sum();
+    }
+
     @Override
     public Map<Integer, List<Employee>> findAllDepartmentAll(int departmentId) {
         final Map<Integer, List<Employee>> employees = employeeService
@@ -61,10 +68,10 @@ public class DepartmentService implements DepartmentInterface {
 
     @Override
     public List<Employee> getAllByDepartment(int departmentId) {
-        List<Employee> temp = employeeService.getEmployeesList()
+        List<Employee> departmentEmployees = employeeService.getEmployeesList()
                 .stream()
                 .filter(e -> e.getDepartment() == departmentId)
                 .collect(Collectors.toList());
-        return temp;
+        return departmentEmployees;
     }
 }

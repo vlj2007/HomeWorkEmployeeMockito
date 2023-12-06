@@ -22,32 +22,30 @@ public class DepartmentController {
         this.service = service;
     }
 
-    @GetMapping(path = "/{departmentId}/employees")
+    @GetMapping(path = "/{Id}/employees")
     public Map<Integer, List<Employee>> departmentIdEmployees(@PathVariable("departmentId") int departmentId) {
         return service.findAllDepartmentAll(departmentId);
     }
 
     @GetMapping(path = "/{id}/salary/sum")
-    public Employee departmentSalarySum(@PathVariable(required = true) String firstName,
-                                        @RequestParam(required = true) String lastName) {
-        return null;
+    public int departmentSalarySum(@PathVariable("departmentId") int departmentId) {
+        return service.getSalarySum(departmentId);
+//        return service.
     }
 
     @GetMapping(path = "/{id}/salary/max")
-    public Employee departmentSalaryMax(@PathVariable(required = true) String firstName,
-                                        @RequestParam(required = true) String lastName) {
-        return null;
+    public Employee departmentSalaryMax(@PathVariable("departmentId") int departmentId) {
+        return service.findEmployeeMaxSalaryInDepartment(departmentId);
     }
 
     @GetMapping(path = "/{id}/salary/min")
-    public Employee departmentSalaryMin(@PathVariable(required = true) String firstName,
-                                        @RequestParam(required = true) String lastName) {
-        return null;
+    public Employee departmentSalaryMin(@PathVariable("departmentId") int departmentId) {
+        return service.findEmployeeMinSalaryInDepartment(departmentId);
     }
 
     @GetMapping(path = "/employees")
-    public Employee departmentEmployees(@RequestParam(required = true) String lastName) {
-        return null;
+    public Map<Integer, List<Employee>> departmentEmployees(@PathVariable("departmentId") int departmentId) {
+        return (Map<Integer, List<Employee>>) service.getAllByDepartment(departmentId);
     }
 
 }

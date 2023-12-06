@@ -35,7 +35,7 @@ public class EmployeeService implements EmployeeInterface {
     }
 
     @Override
-    public Employee add(String firstName, String lastName, int department, double salary) {
+    public Employee add(String firstName, String lastName, int department, int salary) {
         Employee employee = new Employee(firstName, lastName, department, salary);
         String name = firstName + lastName;
         if (getEmployeeMap().size() > NUMBER_OF_EMPLOYEES) {
@@ -49,7 +49,7 @@ public class EmployeeService implements EmployeeInterface {
     }
 
     @Override
-    public Employee remove(String firstName, String lastName, int department, double salary) {
+    public Employee remove(String firstName, String lastName, int department, int salary) {
         Employee employee = new Employee(firstName, lastName, department, salary);
         String name = firstName + lastName;
         if (getEmployeeMap().containsKey(name)) {
@@ -59,7 +59,7 @@ public class EmployeeService implements EmployeeInterface {
     }
 
     @Override
-    public Employee find(String firstName, String lastName, int department, double salary) {
+    public Employee find(String firstName, String lastName, int department, int salary) {
         return Optional.ofNullable(getEmployeeMap().get(firstName + lastName)).orElseThrow(EmployeeNotFoundException::new);
     }
 
