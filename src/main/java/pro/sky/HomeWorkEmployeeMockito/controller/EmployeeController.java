@@ -20,10 +20,10 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/add")
-    public Employee employeeAdd(@RequestParam(required = true) String firstName,
-                                @RequestParam(required = true) String lastName,
-                                @RequestParam(required = true) int departmentId,
-                                @RequestParam(required = true) int salary) {
+    public Employee employeeAdd(@RequestParam String firstName,
+                                @RequestParam String lastName,
+                                @RequestParam int departmentId,
+                                @RequestParam int salary) {
         return service.add(firstName, lastName, departmentId, salary);
     }
 

@@ -41,7 +41,7 @@ public class DepartmentService implements DepartmentInterface {
                 .stream()
                 .filter(e -> e.getDepartment() == departmentId)
                 .max(Comparator.comparingDouble(Employee::getSalary))
-                .orElseThrow();
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class DepartmentService implements DepartmentInterface {
                 .stream()
                 .filter(e -> e.getDepartment() == departmentId)
                 .min(Comparator.comparingDouble(Employee::getSalary))
-                .orElseThrow();
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 
     @Override
