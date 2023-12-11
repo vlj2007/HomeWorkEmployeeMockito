@@ -45,7 +45,7 @@ public class DepartmentController {
 
     @GetMapping(path = "/employees")
     public Map<Integer, List<Employee>> departmentEmployees(@PathVariable("departmentId") int departmentId) {
-        return (Map<Integer, List<Employee>>) service.getAllByDepartment(departmentId);
+        return (Map<Integer, List<Employee>>) service.findAllDepartment(departmentId);
     }
 
 }

@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.util.Arrays.stream;
+
 @Service
 public class DepartmentService implements DepartmentInterface {
 
@@ -67,11 +69,14 @@ public class DepartmentService implements DepartmentInterface {
 
 
     @Override
-    public List<Employee> getAllByDepartment(int departmentId) {
-        List<Employee> departmentEmployees = employeeService.getEmployeesList()
-                .stream()
-                .filter(e -> e.getDepartment() == departmentId)
-                .collect(Collectors.toList());
-        return departmentEmployees;
+    public Map<Integer, List<Employee>> findAllDepartmentAll() {
+        final Map<Integer, List<Employee>> employees =
+                employeeService.getEmployeesList()
+                        .stream()
+                        .collect(Collectors.groupingBy(e -> e.getDepartment()));
+
+        return employees;
+
     }
+
 }

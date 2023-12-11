@@ -7,8 +7,6 @@ import java.util.Map;
 
 public interface DepartmentInterface {
 
-    List<Employee> getAllByDepartment(int departmentId);
-
     Map<Integer, List<Employee>> findAllDepartmentAll(int departmentId);
 
     Employee findEmployeeMaxSalaryInDepartment(int departmentId);
@@ -17,4 +15,5 @@ public interface DepartmentInterface {
 
     List<Employee> findAllDepartment(int departmentId);
 
+    Map<Integer, List<Employee>> findAllDepartmentAll();
 }
