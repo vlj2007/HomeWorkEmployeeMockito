@@ -76,10 +76,10 @@ public class DepartmentServiceTest {
 
 
 
-    @Test
-    void returnSumSalary() {
-        when(employeeServiceMock.findAll()).thenReturn(EMPLOYEES);
-    }
+//    @Test
+//    void returnSumSalary() {
+//        when(employeeServiceMock.findAll()).thenReturn(EMPLOYEES);
+//    }
 
 
 
