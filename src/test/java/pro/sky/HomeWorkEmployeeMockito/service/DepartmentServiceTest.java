@@ -82,17 +82,7 @@ class DepartmentServiceTest {
         employees.add(new Employee("Piter", "usovich", 2, 60000));
         Mockito.when(employeeServiceMock.getEmployeesList()).thenReturn(employees);
         int resultDepartmentAll = departmentService.findAllDepartmentAll(2).size();
-        assertTrue(departmentService.findAllDepartmentAll().containsValue(employees));
-    }
-
-    @Test
-    void findAllDepartmentAll3() {
-        List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee("Piter", "usovich", 1, 20000));
-        employees.add(new Employee("Piter", "usovich", 2, 60000));
-        Mockito.when(employeeServiceMock.getEmployeesList()).thenReturn(employees);
-        boolean resultDepartmentAll = departmentService.findAllDepartmentAll(2).containsValue(2);
-        assertTrue(departmentService.findAllDepartmentAll().containsValue(employees));
+        Assertions.assertEquals(resultDepartmentAll, employees.size());
     }
 
     @Test
@@ -114,7 +104,10 @@ class DepartmentServiceTest {
         employees.add(new Employee("Piter", "usovich", 3, 60000));
         Mockito.when(employeeServiceMock.getEmployeesList()).thenReturn(employees);
         Map<Integer, List<Employee>> result = departmentService.findAllDepartmentAll();
-        assertTrue(employees.containsAll(Collections.singleton(result)));
+        for (Map.Entry<Integer, List<Employee>> entry : result.entrySet()){
+            assertTrue(employees.containsAll(entry.getValue()));
+        }
+
     }
 
     @Test

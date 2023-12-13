@@ -30,12 +30,11 @@ public class DepartmentService implements DepartmentInterface {
 
     @Override
     public Map<Integer, List<Employee>> findAllDepartmentAll(int departmentId) {
-        final Map<Integer, List<Employee>> employees = employeeService
-                .myList(employeeService.getEmployeeMap())
+        return employeeService.getEmployeesList()
                 .stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
-        return employees;
     }
+
 
     @Override
     public Employee findEmployeeMaxSalaryInDepartment(int departmentId) {
