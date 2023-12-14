@@ -2,12 +2,15 @@ package pro.sky.HomeWorkEmployeeMockito.service;
 
 import org.springframework.stereotype.Service;
 import pro.sky.HomeWorkEmployeeMockito.exception.EmployeeAlreadyAddedException;
+import pro.sky.HomeWorkEmployeeMockito.exception.EmployeeIllegalNameOrLastNameException;
 import pro.sky.HomeWorkEmployeeMockito.exception.EmployeeNotFoundException;
 import pro.sky.HomeWorkEmployeeMockito.exception.EmployeeStorageIsFullException;
 import pro.sky.HomeWorkEmployeeMockito.api.EmployeeInterface;
 import pro.sky.HomeWorkEmployeeMockito.model.Employee;
 
 import java.util.*;
+
+import static org.apache.commons.lang3.StringUtils.isAlpha;
 
 @Service
 public class EmployeeService implements EmployeeInterface {
@@ -41,11 +44,17 @@ public class EmployeeService implements EmployeeInterface {
         if (getEmployeeMap().size() > NUMBER_OF_EMPLOYEES) {
             throw new EmployeeStorageIsFullException("Превышен лимит количества сотрудников");
         }
-        if (getEmployeeMap().containsKey(name)) {
-            throw new EmployeeAlreadyAddedException("уже есть такой сотрудник");
+
+        if (isAlpha(firstName) && isAlpha(lastName)) {
+            if (!employeeMap.containsKey(name)) {
+                employeeMap.put(name, employee);
+                return employee;
+            } else {
+                throw new EmployeeAlreadyAddedException("Такой сотрудник уже есть");
+            }
+        } else {
+            throw new EmployeeIllegalNameOrLastNameException("Некорректное имя или фамилия");
         }
-        getEmployeeMap().put(name, employee);
-        return employee;
     }
 
     @Override

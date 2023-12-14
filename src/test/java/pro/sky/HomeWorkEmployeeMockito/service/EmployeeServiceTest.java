@@ -40,32 +40,22 @@ class EmployeeServiceTest {
 
     }
 
-//    @Test
-//    public void testAddWillThrowExceptionWhenIllegalName() {
-//        Assertions.assertThrows(EmployeeIllegalNameOrLastNameException.class,
-//                () -> {
-//                    employeeInterface.add("!", "Верблюдов", 2, 9000);
-//                });
-//    }
-//
-//    @Test
-//    public void testAddWillThrowExceptionWhenIllegalName2() {
-//        Assertions.assertThrows(EmployeeIllegalNameOrLastNameException.class,
-//                () -> {
-//                    employeeInterface.add("!", "Верблюдов", 2, 9000);
-//                });
-//    }
+    @Test
+    public void testAddWillThrowExceptionWhenIllegalName() {
+        Assertions.assertThrows(EmployeeIllegalNameOrLastNameException.class,
+                () -> {
+                    employeeInterface.add("!", "Верблюдов", 2, 9000);
+                });
+    }
 
-//    @ParameterizedTest
-//    @MethodSource("provideParamsForTest")
-//    public void testAddWillThrowExceptionWhenIllegalName3(String firstName, String lastName, int department, int salary) {
-//        Employee employee = new Employee(firstName, lastName, department, salary);
-//        Assertions.assertThrows(EmployeeAlreadyAddedException.class,
-//                () -> {
-//                    employeeInterface.add("Артем", "Верблюдов", 2, 9000);
-//                });
-//    }
-
+    @Test
+    public void testAddWillThrowExceptionWhenIllegalName3() {
+        employeeInterface.add("Артем", "Верблюдов", 2, 9000);
+        Assertions.assertThrows(EmployeeAlreadyAddedException.class,
+                () -> {
+                    employeeInterface.add("Артем", "Верблюдов", 2, 9000);
+                });
+    }
 
     @ParameterizedTest
     @MethodSource("provideParamsForTest")
@@ -84,7 +74,6 @@ class EmployeeServiceTest {
                 () -> {
                     employeeInterface.remove("Артем", "Верблюдов", 2, 9000);
                 });
-
     }
 
     @ParameterizedTest
@@ -95,21 +84,14 @@ class EmployeeServiceTest {
                 () -> {
                     employeeInterface.remove("Dkflbv", "hdjhjfk", 2, 9000);
                 });
-
     }
-
-//    @ParameterizedTest
-//    @MethodSource("provideParamsForTest")
-//    void addCorrectlyEmployees(String firstName, String lastName, int department, int salary) {
-//        Employee employee = new Employee(firstName, lastName, department, salary);
-//        employeeInterface.add(employee.getFirstName(),
-//                employee.getLastName(),
-//                employee.getDepartment(),
-//                employee.getSalary()
-//        );
-//        assertEquals(employee, employeeInterface.add(firstName, lastName, department, salary));
-//        assertEquals(1, employeeInterface.findAll().size());
-//    }
+    @ParameterizedTest
+    @MethodSource("provideParamsForTest")
+    void addCorrectlyEmployees(String firstName, String lastName, int department, int salary) {
+        Employee employee = new Employee(firstName, lastName, department, salary);
+        assertEquals(employee, employeeInterface.add(firstName, lastName, department, salary));
+        assertEquals(1, employeeInterface.findAll().size());
+    }
 
     @ParameterizedTest
     @MethodSource("provideParamsForTest")
